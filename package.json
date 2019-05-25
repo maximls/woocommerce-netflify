@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "mailchimp-api-v3": "^1.13.0",
+    "netlify-lambda": "^1.4.7",
+    "querystring": "^0.2.0",
+    "woocommerce": "^2.4.0",
+    "woocommerce-api": "^1.4.2"
+  },
+  "scripts": {
+    "start:lambda": "netlify-lambda serve src"
+  },
+  "devDependencies": {
+    "dotenv": "^8.0.0"
+  }
+}
