@@ -4,9 +4,9 @@
 const config = require("../config.js");
 const WooCommerce = require("woocommerce");
 const wooCommerce = new WooCommerce({
-  url: "https://simplybeautifulbranding.com",
-  consumerKey: "ck_7e6299eff6cb1e3f7f9b3a72e2b8c7015204e3bd",
-  secret: "cs_86c161fbede018d5709e4cd9b4158bf745792e2a",
+  url: config.WCurl,
+  consumerKey: config.WCkey,
+  secret: config.WCsecret,
   apiPath: "/wc-api/v3"
 });
 
@@ -18,12 +18,12 @@ exports.handler = function(event, context, callback) {
 
   var data = {
     coupon: {
-      code: "25off",
+      code: "35off",
       type: "percent",
-      amount: "25",
+      amount: "35",
       individual_use: true,
       exclude_sale_items: true,
-      minimum_amount: "100.00"
+      minimum_amount: "500.00"
     }
   };
   wooCommerce.post("/coupons", data, function(err, data, res) {
