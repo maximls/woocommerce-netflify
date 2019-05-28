@@ -10,29 +10,41 @@ const wooCommerce = new WooCommerce({
   apiPath: "/wc-api/v3"
 });
 
-exports.handler = function(event, context, callback) {
+exports.handler = function(event, context) {
   //const data = querystring.parse(event.body);
   //const redirectParams = parseDataRedirect(data);
 
-  console.log(config.WCkey, config.WCsecret);
+  //console.log(config.WCkey, config.WCsecret);
 
   var data = {
     coupon: {
-      code: "35off",
+      code: "55off",
       type: "percent",
-      amount: "35",
+      amount: "55",
       individual_use: true,
       exclude_sale_items: true,
       minimum_amount: "500.00"
     }
   };
-  wooCommerce.post("/coupons", data, function(err, data, res) {
-    console.log("Response", res);
-  });
-  callback(null, {
-    statusCode: 200,
-    body: "Success!"
-  });
+
+  return wooCommerce
+    .post("/coupons", data, function(err, data, res) {
+      return res;
+    })
+    .then(result => {
+      //console.log("Response in promise", result);
+      return {
+        statusCode: 200,
+        body: "Success!"
+      };
+    })
+    .catch(err => {
+      console.log(err);
+      return {
+        statusCode: 400,
+        body: "There was an error!"
+      };
+    });
 
   // return addCoupon()
   //   .then(result => {
